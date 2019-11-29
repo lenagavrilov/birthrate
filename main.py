@@ -4,12 +4,14 @@ import boys_or_girls
 
 def choice():
     user_choice = ""
-    try:
-        user_choice = int(input("Press 1 to see the country with highest birth rate.\n"
-                                "Press 2 to see if there were more girls or boys born.\n"))
-    except ValueError:
-        print("Enter numbers only!!!")
-        exit(0)
+    flag = True
+    while flag:
+        try:
+            user_choice = int(input("Press 1 to see the country with highest birth rate.\n"
+                                    "Press 2 to see if there were more girls or boys born.\n"))
+            flag = False
+        except ValueError:
+            print("Enter numbers only!!!")
     do_choice(user_choice)
     return user_choice
 
@@ -21,6 +23,7 @@ def do_choice(user_choice):
         boys_or_girls.girls_and_boys()
     else:
         print("The choice is not valid. You should press 1 or 2 only.")
+        choice()
 
 
 if __name__ == "__main__":

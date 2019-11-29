@@ -1,12 +1,14 @@
-
 def general():
     lines = []
-    with open('births.csv','r') as data:
-        next(data)
-        for line in data:
-            line = line[:len(line)-1].split(',')
-            if int(line[0]) > 1985:
-                lines.append(line)
+    try:
+        with open('births.csv', 'r') as data:
+            next(data)
+            for line in data:
+                line = line[:len(line) - 1].split(',')
+                if int(line[0]) > 1985:
+                    lines.append(line)
+    except FileNotFoundError:
+        print("File doesn't exist in the specified path or the name spelled incorrectly")
     return lines
 
 
@@ -25,25 +27,19 @@ def country_quantity_list():
 def count_children():
     country_quantity = country_quantity_list()
     altogether = {}
-    for k,v in country_quantity.items():
+    for k, v in country_quantity.items():
         altogether[k] = sum(v)
-    country_with_max_births= max(altogether, key = altogether.get)
-    max_births = max(altogether.values())
-    print ("In the years of 1986-2006 the country with the highest birthrate was {}, counting {} births."
-           .format(country_with_max_births,"{:,}".format(max_births)))
+    try:
+        country_with_max_births = max(altogether, key=altogether.get)
+        max_births = max(altogether.values())
+        print("In the years of 1986-2006 the country with the highest birthrate was {}, counting {} births."
+              .format(country_with_max_births, "{:,}".format(max_births)))
+    except ValueError:
+        exit(0)
 
 
 if __name__ == "__main__":
     count_children()
-
-
-
-
-
-
-
-
-
 
 """for k,v in general_list.items():
         k = int(k)
@@ -53,7 +49,6 @@ if __name__ == "__main__":
         v[3]=int(v[3])
         print(general_list)
         return general_list"""
-
 
 """def year_per_country():
     year_country_quantity = {}
@@ -70,7 +65,3 @@ if __name__ == "__main__":
     return year_per_country()
 
 year_per_country()"""
-
-
-
-

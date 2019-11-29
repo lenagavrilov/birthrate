@@ -2,11 +2,14 @@
 
 def general_list():
     lines = []
-    with open('births.csv', 'r') as data:
-        next(data)
-        for line in data:
-            line = line[:len(line)-1].split(',')
-            lines.append(line)
+    try:
+        with open('births.csv', 'r') as data:
+            next(data)
+            for line in data:
+                line = line[:len(line)-1].split(',')
+                lines.append(line)
+    except FileNotFoundError:
+        print("File doesn't exist in the specified path or the name spelled incorrectly")
     return lines
 
 
